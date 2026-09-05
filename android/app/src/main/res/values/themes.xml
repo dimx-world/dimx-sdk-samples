@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- appcompat comes with the SDK; no other UI library is needed. -->
+    <style name="Theme.DimxSample" parent="Theme.AppCompat.DayNight.DarkActionBar" />
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DimensionX Sample</string>
+    <string name="show_ar">Show AR screen</string>
+    <string name="show_web">Show web screen</string>
+</resources>

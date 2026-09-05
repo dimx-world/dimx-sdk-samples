@@ -1,0 +1,36 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'world.dimx.samples'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'world.dimx.samples.android'
+        // The SDK needs ARCore, which needs Android 9 (API 28) and OpenGL ES 3.
+        minSdk 28
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // docs:begin dependency
+    // The DimensionX Android SDK, from https://dl.dimx.world/sdk/android (see
+    // settings.gradle). Its pom brings appcompat, ARCore and the rest with it.
+    implementation "world.dimx:dimx-android-sdk:0.1.0"
+    // docs:end
+}

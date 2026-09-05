@@ -1,0 +1,6 @@
+// The Android Gradle plugin the sample builds with. The DimensionX SDK pulls
+// in androidx.core 1.18 and androidx.activity 1.13, which need AGP 8.9.1 or
+// newer and compileSdk 36.
+plugins {
+    id 'com.android.application' version '8.9.1' apply false
+}

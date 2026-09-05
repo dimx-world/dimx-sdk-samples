@@ -1,0 +1,27 @@
+buildscript {
+    ext {
+        buildToolsVersion = "36.0.0"
+        minSdkVersion = 28
+        compileSdkVersion = 36
+        targetSdkVersion = 34
+        ndkVersion = "26.1.10909125"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // dimx-android-sdk 0.0.2 pulls androidx.core 1.18 / activity 1.13, which
+        // require AGP 8.9.1+; RN 0.76 would otherwise pin AGP 8.6.
+        classpath("com.android.tools.build:gradle:8.9.1")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"
+
+allprojects {
+    repositories {
+        maven { url 'https://dl.dimx.world/sdk/android' }
+    }
+}

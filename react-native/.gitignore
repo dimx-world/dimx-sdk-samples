@@ -1,0 +1,17 @@
+node_modules/
+.npm-cache/
+*.tgz
+
+android/.gradle/
+android/build/
+android/app/.cxx/
+android/app/build/
+android/local.properties
+
+ios/Pods/
+ios/build/
+ios/.xcode.env.local
+ios/**/xcuserdata/
+
+*.DS_Store
+*.log

@@ -1,0 +1,11 @@
+# Build output of every sample; the sources are small and the outputs are not.
+build/
+.gradle/
+local.properties
+node_modules/
+Pods/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+.DS_Store
+*.log
