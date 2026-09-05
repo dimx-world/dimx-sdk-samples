@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         let appConfig = AppConfig()
-        appConfig.addWebVersion("https://meta.dimx.world/version")
+        appConfig.addWebVersion("https://app.dimx.world/version")
         appConfig.setShowAppScreenAction { [weak self] args in
             guard let self = self else { return }
             
