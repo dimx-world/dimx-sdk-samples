@@ -124,19 +124,24 @@ if (javaHome) {
   env.JAVA_HOME = javaHome;
 }
 
+const ANDROID_DIR = path.join(EXAMPLE_DIR, 'android');
+
 const extraPathDirs = [
   path.join(sdkDir, 'platform-tools'),
   path.join(sdkDir, 'emulator'),
   path.join(sdkDir, 'cmdline-tools', 'latest', 'bin'),
   javaHome && path.join(javaHome, 'bin'),
   path.join(EXAMPLE_DIR, 'node_modules', '.bin'),
+  // The React Native CLI runs a bare `gradlew.bat` from the android directory,
+  // and cmd.exe looks there only while NoDefaultCurrentDirectoryInExePath is
+  // unset - on a hardened Windows desk the wrapper has to be on the PATH.
+  ANDROID_DIR,
 ].filter(dir => dir && fs.existsSync(dir));
 
 env[PATH_KEY] = [...extraPathDirs, process.env[PATH_KEY] || ''].join(
   path.delimiter,
 );
 
-const ANDROID_DIR = path.join(EXAMPLE_DIR, 'android');
 const isGradle = command === 'gradlew' || command === 'gradle';
 
 const result = spawnSync(

@@ -19,6 +19,21 @@ npm run android:build    # gradle :app:assembleDebug, with the Android SDK found
 npm run android          # on a connected phone
 ```
 
+The debug build embeds its JavaScript bundle (`debuggableVariants = []` in
+`android/app/build.gradle`), so a Run from Android Studio, or the APK
+`android:build` made, works with nothing else running. React Native's default
+is the opposite: a debug build carries no JavaScript and loads it from
+**Metro**, the bundler on the development machine, so a build started from
+Android Studio - which starts no Metro - stops at *Unable to load script*.
+With Metro up the debug app loads from it instead, hot reload included:
+`npm run android` starts it and runs `adb reverse tcp:8081 tcp:8081` so the
+phone reaches it through adb; from Android Studio, `npm start` and the
+reverse by hand. The release build is what testers get:
+
+```bash
+npm run android:release  # gradle installRelease on the connected phone
+```
+
 iOS needs a mac with CocoaPods 1.13 or newer (`bundle install` reads the
 Gemfile):
 

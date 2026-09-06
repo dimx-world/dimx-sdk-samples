@@ -6,6 +6,7 @@
     "android": "node scripts/with-android-env.js react-native run-android",
     "android:build": "node scripts/with-android-env.js gradlew :app:assembleDebug",
     "android:clean": "node scripts/with-android-env.js gradlew clean",
+    "android:release": "node scripts/with-android-env.js react-native run-android --mode release --no-packager",
     "adb": "node scripts/with-android-env.js adb",
     "ios": "react-native run-ios",
     "lint": "eslint .",
