@@ -52,9 +52,9 @@ packages:
   dimx_flutter_sdk:
     dependency: "direct main"
     description:
-      path: "../../flutter-sdk"
-      relative: true
-    source: path
+      name: dimx_flutter_sdk
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.1"
   fake_async:
     dependency: transitive
