@@ -53,6 +53,7 @@ packages:
     dependency: "direct main"
     description:
       name: dimx_flutter_sdk
+      sha256: d2710b83792084324a81c32c3247d986937293327d43374d2fbb5c3f86a12402
       url: "https://pub.dev"
     source: hosted
     version: "0.0.1"
@@ -225,4 +226,4 @@ packages:
     version: "15.3.0"
 sdks:
   dart: ">=3.11.0 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.24.0"
