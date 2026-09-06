@@ -12,3 +12,4 @@ xcuserdata/
 .idea/
 # Android Studio puts signed bundles here (Build > Generate Signed App Bundle)
 **/app/release/
+pubspec_overrides.yaml

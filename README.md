@@ -2,17 +2,19 @@
 
 Sample apps for the DimensionX SDKs, one per platform, each the smallest app
 that opens a DimensionX AR experience and its web page. Every one of them is
-`SampleApp` - the Xcode project, the Gradle project, the React Native app -
-and installs as *DimensionX Sample*; the React Native one as *DimensionX RN
-Sample*, so it sits beside the native Android sample on one phone:
+`SampleApp` - the Xcode project, the Gradle project, the React Native app, the
+Flutter package `sample_app` - and installs as *DimensionX Sample*; the React
+Native and Flutter ones as *DimensionX RN Sample* and *DimensionX Flutter
+Sample*, so they sit beside the native Android sample on one phone:
 
 | directory | SDK | how the SDK is consumed |
 | --- | --- | --- |
 | [`android/`](android/) | [dimx-android-sdk](https://github.com/dimx-world/dimx-android-sdk) | `implementation "world.dimx:dimx-android-sdk:<version>"` from `https://dl.dimx.world/sdk/android` |
 | [`ios/`](ios/) | [dimx-ios-sdk](https://github.com/dimx-world/dimx-ios-sdk) | Swift package `https://github.com/dimx-world/dimx-ios-sdk.git`, exact version |
 | [`react-native/`](react-native/) | [@dimx/react-native-sdk](https://www.npmjs.com/package/@dimx/react-native-sdk) | `npm install @dimx/react-native-sdk@<version>` |
+| [`flutter/`](flutter/) | [dimx_flutter_sdk](https://pub.dev/packages/dimx_flutter_sdk) | `flutter pub add dimx_flutter_sdk` at an exact version |
 
-Each directory has its own README with build and run steps. All three need a
+Each directory has its own README with build and run steps. All of them need a
 real phone: the SDKs use ARCore and ARKit, which the emulators and the
 simulator do not provide.
 
