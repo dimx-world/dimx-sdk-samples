@@ -1,10 +1,16 @@
 # DimensionX React Native SDK sample
 
-A React Native 0.76 app that installs `@dimx/react-native-sdk` from npm and
-opens an AR experience with it. It is the consumer's view of the bridge: the
+A React Native 0.87 app that installs `@dimx/react-native-sdk` from npm and
+opens an AR experience and its web page with it. It is the consumer's view of the bridge: the
 package comes from the registry exactly as it would in your own app.
 
 ## Build and run
+
+Node 22.11 or newer, a JDK 17 or newer and the Android SDK with platform 37
+(React Native 0.87 compiles against it; the app itself targets Android 16).
+On Windows the SDK also needs a CMake 4.x (SDK Manager, SDK Tools tab): the
+New Architecture's C++ build produces paths longer than 260 characters, which
+the ninja bundled with the default CMake 3.22.1 cannot open.
 
 ```bash
 npm install
@@ -29,12 +35,12 @@ needs a real device on both platforms.
 
 - `package.json` depends on `@dimx/react-native-sdk` at an exact version - the
   SDK release the sample was validated against.
-- `App.tsx` calls `initializeDimxSdk({...})` once and `showARScreen(url)` on the
-  button; both return promises that reject with a reason when the SDK cannot.
+- `App.tsx` calls `initializeDimxSdk({...})` once and `showARScreen(url)` /
+  `showWebScreen(url)` on the buttons; all return promises that reject with a
+  reason when the SDK cannot.
 - `android/build.gradle` adds the maven repository the native Android SDK comes
   from (`https://dl.dimx.world/sdk/android`) under `allprojects`, which the host
-  app has to do itself, and pins the Android Gradle plugin at 8.9.1 because the
-  SDK's dependencies need it.
+  app has to do itself.
 - `ios/Podfile` builds pods as dynamic frameworks, which the Swift package
   products require.
 - `scripts/with-android-env.js` finds the Android SDK and a JDK so the npm

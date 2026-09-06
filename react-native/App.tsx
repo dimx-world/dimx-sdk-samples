@@ -8,22 +8,42 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { initializeDimxSdk, showARScreen } from '@dimx/react-native-sdk';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
+import { initializeDimxSdk, showARScreen, showWebScreen } from '@dimx/react-native-sdk';
 
+// docs:begin urls
+// A public DimensionX experience: the dimension and one of its locations.
 const DEMO_AR_URL = 'https://go.dimx.world/?dim=3358080808&loc=2134961551&live=1&force=1';
+const DEMO_WEB_URL = 'https://go.dimx.world/?dim=3358080808';
 const WEB_VERSION_URL = 'https://app.dimx.world/version';
 const DEFAULT_APP_URL = 'https://go.dimx.world';
+// docs:end
 
 export default function App() {
+  return (
+    <SafeAreaProvider>
+      <StatusBar barStyle="light-content" />
+      <SampleScreen />
+    </SafeAreaProvider>
+  );
+}
+
+function SampleScreen() {
+  const insets = useSafeAreaInsets();
   const [platformVersion] = useState(`${Platform.OS} ${String(Platform.Version)}`);
   const [isSdkInitialized, setIsSdkInitialized] = useState(false);
   const initPromiseRef = useRef<Promise<void> | null>(null);
 
+  // docs:begin init
+  // The SDK is initialised once; every screen waits for it. On Android the
+  // appScreenActivity is where the SDK returns to when its own screens close.
   const ensureDimxSdkInitialized = async () => {
     if (isSdkInitialized) {
       return;
     }
-
     if (!initPromiseRef.current) {
       initPromiseRef.current = initializeDimxSdk({
         qrCodeEnabled: true,
@@ -31,7 +51,7 @@ export default function App() {
         shareVideoEnabled: false,
         webVersionUrl: WEB_VERSION_URL,
         defaultAppUrl: DEFAULT_APP_URL,
-        appScreenActivity: 'com.dimxexample.MainActivity',
+        appScreenActivity: 'world.dimx.sampleapp.rn.MainActivity',
       })
         .then(() => {
           setIsSdkInitialized(true);
@@ -41,30 +61,24 @@ export default function App() {
           throw error;
         });
     }
-
     await initPromiseRef.current;
   };
+  // docs:end
 
   useEffect(() => {
     let isMounted = true;
-
-    const initDimxSdk = async () => {
-      try {
-        await ensureDimxSdkInitialized();
-      } catch (error) {
-        if (isMounted) {
-          Alert.alert('Dimx init failed', String(error));
-        }
+    ensureDimxSdkInitialized().catch(error => {
+      if (isMounted) {
+        Alert.alert('Dimx init failed', String(error));
       }
-    };
-
-    initDimxSdk();
-
+    });
     return () => {
       isMounted = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // docs:begin screens
   const handleShowAR = async () => {
     try {
       await ensureDimxSdkInitialized();
@@ -74,17 +88,30 @@ export default function App() {
     }
   };
 
+  const handleShowWeb = async () => {
+    try {
+      await ensureDimxSdkInitialized();
+      await showWebScreen(DEMO_WEB_URL);
+    } catch (error) {
+      Alert.alert('Web failed', String(error));
+    }
+  };
+  // docs:end
+
   return (
     <View style={styles.screen}>
-      <StatusBar hidden />
-      <View style={styles.appBar}>
-        <Text style={styles.appBarTitle}>Plugin example app</Text>
+      <View style={[styles.appBar, { paddingTop: insets.top }]}>
+        <Text style={styles.appBarTitle}>DimensionX RN Sample</Text>
       </View>
       <View style={styles.body}>
-        <Text style={styles.platformText}>{`Running on: ${platformVersion}\n`}</Text>
+        <Text style={styles.platformText}>{`Running on: ${platformVersion}`}</Text>
         <View style={styles.spacer} />
         <TouchableOpacity style={styles.button} onPress={handleShowAR} activeOpacity={0.82}>
-          <Text style={styles.buttonLabel}>Show AR view</Text>
+          <Text style={styles.buttonLabel}>Show AR screen</Text>
+        </TouchableOpacity>
+        <View style={styles.spacer} />
+        <TouchableOpacity style={styles.button} onPress={handleShowWeb} activeOpacity={0.82}>
+          <Text style={styles.buttonLabel}>Show web screen</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -97,21 +124,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   appBar: {
-    height: 56,
     backgroundColor: '#2196f3',
-    justifyContent: 'center',
     paddingHorizontal: 16,
-    paddingTop: Platform.OS === 'ios' ? 44 : 0, // Account for status bar area on iOS
+    paddingBottom: 16,
     elevation: 4,
-    shadowColor: '#000000',
-    shadowOpacity: 0.24,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
   },
   appBarTitle: {
     color: '#ffffff',
     fontSize: 20,
     fontWeight: '500',
+    paddingTop: 16,
   },
   body: {
     flex: 1,
@@ -123,7 +145,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   spacer: {
-    height: 32,
+    height: 24,
   },
   button: {
     backgroundColor: '#2196f3',
@@ -131,10 +153,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     elevation: 2,
-    shadowColor: '#000000',
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    shadowOffset: { width: 0, height: 1 },
   },
   buttonLabel: {
     color: '#ffffff',

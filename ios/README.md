@@ -5,7 +5,7 @@ AR experience, one opening its web page.
 
 ## Build and run
 
-Open `DimxSample.xcodeproj` in Xcode 16 or newer, pick your team under
+Open `SampleApp.xcodeproj` in Xcode 16 or newer, pick your team under
 Signing & Capabilities, and run it on an iPhone. The SDK ships device-only
 binaries (`ios-arm64`), so the simulator is not a destination.
 
@@ -18,7 +18,7 @@ package in the project's Package Dependencies.
 To check the sample compiles without a signing identity:
 
 ```bash
-xcodebuild -project DimxSample.xcodeproj -scheme DimxSample -sdk iphoneos \
+xcodebuild -project SampleApp.xcodeproj -scheme SampleApp -sdk iphoneos \
     -configuration Release CODE_SIGNING_ALLOWED=NO build
 ```
 

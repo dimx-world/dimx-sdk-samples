@@ -1,7 +1,10 @@
 # dimx-sdk-samples
 
 Sample apps for the DimensionX SDKs, one per platform, each the smallest app
-that opens a DimensionX AR experience and its web page:
+that opens a DimensionX AR experience and its web page. Every one of them is
+`SampleApp` - the Xcode project, the Gradle project, the React Native app -
+and installs as *DimensionX Sample*; the React Native one as *DimensionX RN
+Sample*, so it sits beside the native Android sample on one phone:
 
 | directory | SDK | how the SDK is consumed |
 | --- | --- | --- |

@@ -5,15 +5,14 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-ENV['RCT_NEW_ARCH_ENABLED'] = '0'
-
 # react-native-sdk consumes the Dimx iOS SDK as a Swift package (see
 # spm_dependency in its podspec). React Native merges SPM static libraries into
-# the consuming pod's archive, so with statically linked pods ARCore's three
-# products land in libreact-native-sdk.a three times over and the link fails on
+# the consuming pod's archive, so with statically linked pods ARCore's products
+# land in libreact-native-sdk.a several times over and the link fails on
 # duplicate symbols. Dynamic frameworks are required, not merely preferred.
 ENV['USE_FRAMEWORKS'] ||= 'dynamic'
 
+# The Dimx iOS SDK is iOS 16.4 and up.
 platform :ios, '16.4'
 prepare_react_native_project!
 
@@ -23,14 +22,8 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'DimxExample' do
+target 'SampleApp' do
   config = use_native_modules!
-
-  # The Firebase/GoogleUtilities modular_headers pods that used to live here were
-  # only needed by the ARCore *pod* (ARCore/GARSession depends on
-  # Firebase/RemoteConfig). ARCore now comes from SwiftPM via DimxARCore, which
-  # carries its own copy of that dependency tree — declaring the pods as well
-  # would link GoogleUtilities twice.
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -38,13 +31,7 @@ target 'DimxExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'DimxExampleTests' do
-    inherit! :complete
-    # Pods for testing
-  end
-
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
       config[:reactNativePath],
@@ -54,9 +41,8 @@ target 'DimxExample' do
 
     # Building pods as dynamic frameworks (required for the SPM products, see
     # USE_FRAMEWORKS above) turns React-Core's own includes of yoga/Yoga.h into
-    # errors, because React Native ships no modulemap for those headers.
-    # CLANG_WARN_NON_MODULAR_INCLUDE_IN_FRAMEWORK_MODULE does NOT suppress this;
-    # the module builder needs to be told the includes are allowed.
+    # errors, because React Native ships no modulemap for those headers. The
+    # module builder needs to be told the includes are allowed.
     installer.pods_project.build_configurations.each do |config|
       config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
     end
@@ -65,10 +51,5 @@ target 'DimxExample' do
         config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
       end
     end
-
-    # NOTE: this used to strip the app's own PrivacyInfo.xcprivacy from the
-    # resources phase, because react-native-sdk shipped its manifest via
-    # s.resources and the two collided at the .app root. The podspec now ships it
-    # in a resource bundle, so the app keeps its own manifest as Apple expects.
   end
 end
