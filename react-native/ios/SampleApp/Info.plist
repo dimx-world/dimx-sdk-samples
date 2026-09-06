@@ -63,5 +63,7 @@
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save and share photos and videos taken in the AR experience</string>
 </dict>
 </plist>
