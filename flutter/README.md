@@ -35,3 +35,8 @@ which the emulators and the simulator do not provide.
   Bluetooth usage descriptions the SDK's screens require. The plugin is a
   Swift package, so Flutter resolves the native SDK through Swift Package
   Manager; nothing is built or vendored by hand.
+- `ios/Runner.xcodeproj` targets iOS 16.4, the SDK's floor - Flutter's
+  template starts lower, and the plugin's package refuses a target below it.
+- There is no Podfile and no CocoaPods integration in the Xcode project:
+  with Swift Package Manager on, Flutter needs neither, and this app has no
+  plugin that would.
