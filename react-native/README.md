@@ -57,6 +57,10 @@ needs a real device on both platforms.
   from (`https://dl.dimx.world/sdk/android`) under `allprojects`, which the host
   app has to do itself.
 - `ios/Podfile` builds pods as dynamic frameworks, which the Swift package
-  products require.
+  products require. Its post-install also adds a phase to the app target that
+  removes the app's copies of the SDK xcframeworks' `.signature` files: an
+  archive collects one per target that processed a framework, the bridge pod
+  and the app both do, and Xcode (15.0 through 26.x) fails the archive on the
+  second copy. A plain build never shows it; only an archive does.
 - `scripts/with-android-env.js` finds the Android SDK and a JDK so the npm
   scripts work on any machine without local paths.

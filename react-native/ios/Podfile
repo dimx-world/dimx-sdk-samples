@@ -51,5 +51,26 @@ target 'SampleApp' do
         config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
       end
     end
+
+    # Archiving collects every xcframework's .signature into the archive once per
+    # target that processed the framework. The SDK's binary targets are processed
+    # for the bridge pod (its own build directory) and again for the app, and the
+    # second copy fails the archive: "openal.xcframework-ios.signature couldn't be
+    # copied to Signatures because an item with the same name already exists" -
+    # an Xcode bug since 15.0 (FB12373687), still there in 26.x. A plain build
+    # never runs the collection, so only an archive shows it. The known way past
+    # it (maplibre-react-native #1490) is a phase on the app target that drops the
+    # app's copies before the archive collects them; the pod's copies remain.
+    installer.aggregate_targets.each do |aggregate|
+      aggregate.user_project.targets.each do |target|
+        next unless target.name == 'SampleApp'
+        phase_name = '[DimensionX] Remove duplicate xcframework signatures'
+        next if target.shell_script_build_phases.any? { |phase| phase.name == phase_name }
+        phase = target.new_shell_script_build_phase(phase_name)
+        phase.shell_script = 'rm -f "$CONFIGURATION_BUILD_DIR"/*.xcframework-ios.signature'
+        phase.always_out_of_date = '1'
+      end
+      aggregate.user_project.save
+    end
   end
 end
