@@ -29,11 +29,16 @@ xcodebuild -project SampleApp.xcodeproj -scheme SampleApp -sdk iphoneos \
 - `SceneDelegate.swift` initialises the SDK once the window exists:
   `AppConfig`, `addWebVersion`, `setShowAppScreenAction` (how the SDK hands the
   screen back to the app), then `Context.initialize(window, appConfig)`.
-- `ViewController.swift` checks `Context.inst().permissionsGranted()`, asks with
-  `validatePermissions` when needed, and opens the screens with
-  `Context.inst().showARScreen(url, "", "")` and `showWebScreen(url)`.
-- `Info.plist` carries the camera, location and Bluetooth usage descriptions the
-  SDK's screens require.
+- `ViewController.swift` opens the screens with
+  `Context.inst().showARScreen(url, "", "", onDenied:)` and `showWebScreen(url)`;
+  the SDK asks for the permissions itself when the AR screen opens, and
+  `onDenied` is where a refused camera lands.
+- `Info.plist` carries the camera, location, photo library and Bluetooth usage
+  descriptions the SDK's APIs make App Store Connect demand: a binary linking
+  the SDK without one is refused at upload (ITMS-90683).
+- The target links with `-ObjC` (Other Linker Flags). ARCore, inside the SDK,
+  ships as static libraries whose Objective-C categories the linker drops
+  otherwise, and the app then dies at launch with an unrecognized selector.
 
 The version this sample is pinned to is the SDK release it was validated
 against; the Release Center moves it with every SDK release.
