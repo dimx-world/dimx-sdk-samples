@@ -19,7 +19,7 @@ dependencies:
     sdk: flutter
 
   # The SDK release this sample is validated against; the Release Center moves it.
-  dimx_flutter_sdk: 0.0.1
+  dimx_flutter_sdk: 0.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

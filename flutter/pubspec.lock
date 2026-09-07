@@ -53,10 +53,10 @@ packages:
     dependency: "direct main"
     description:
       name: dimx_flutter_sdk
-      sha256: d2710b83792084324a81c32c3247d986937293327d43374d2fbb5c3f86a12402
+      sha256: "1b12c867cb8993a0cb5f881c3d0fe6eab937a32f4027d5d0e3aedc175e8bcb53"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.1.2"
   fake_async:
     dependency: transitive
     description:
