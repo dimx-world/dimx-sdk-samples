@@ -32,6 +32,6 @@ dependencies {
     // docs:begin dependency
     // The DimensionX Android SDK, from https://dl.dimx.world/sdk/android (see
     // settings.gradle). Its pom brings appcompat, ARCore and the rest with it.
-    implementation "world.dimx:dimx-android-sdk:0.1.0"
+    implementation "world.dimx:dimx-android-sdk:0.1.2"
     // docs:end
 }
