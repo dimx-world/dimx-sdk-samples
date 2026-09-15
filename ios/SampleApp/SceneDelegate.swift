@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appConfig = AppConfig()
         appConfig.addWebVersion("https://app.dimx.world/version")
+        // Telemetry to the DimensionX platform is the app's choice; the sample turns it on.
+        appConfig.setTelemetryEnabled(true)
         appConfig.setShowAppScreenAction { [weak self] args in
             guard let self = self else { return }
             

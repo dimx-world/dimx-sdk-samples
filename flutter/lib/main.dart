@@ -35,6 +35,8 @@ class _SampleAppState extends State<SampleApp> {
   /// The SDK is initialised once; every screen waits for it.
   Future<void> _ensureInitialized() {
     return _initialization ??= _dimx.initializeDimxSdk({
+      // Telemetry to the DimensionX platform is the app's choice; the sample turns it on.
+      'telemetryEnabled': true,
       'qrCodeEnabled': true,
       'sharePhotoEnabled': true,
       'shareVideoEnabled': false,

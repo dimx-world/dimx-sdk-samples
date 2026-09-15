@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         config.setShareVideoEnabled(false);
         config.addWebVersion("https://app.dimx.world/version");
         config.setDefaultAppUrl("https://go.dimx.world");
+        // Telemetry to the DimensionX platform is the app's choice; the sample turns it on.
+        config.setTelemetryEnabled(true, "android-sdk");
         // The activity the SDK returns to when its own screens close.
         config.setAppScreenActivity(MainActivity.class.getName());
 
