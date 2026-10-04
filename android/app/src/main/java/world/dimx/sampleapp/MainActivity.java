@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         AppConfig config = new AppConfig();
-        config.setQRCodeEnabled(true);
         config.setSharePhotoEnabled(true);
         config.setShareVideoEnabled(false);
         config.addWebVersion("https://app.dimx.world/version");

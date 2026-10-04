@@ -37,7 +37,6 @@ class _SampleAppState extends State<SampleApp> {
     return _initialization ??= _dimx.initializeDimxSdk({
       // Telemetry to the DimensionX platform is the app's choice; the sample turns it on.
       'telemetryEnabled': true,
-      'qrCodeEnabled': true,
       'sharePhotoEnabled': true,
       'shareVideoEnabled': false,
       'webVersionUrl': 'https://app.dimx.world/version',

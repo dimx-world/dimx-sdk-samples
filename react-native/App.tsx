@@ -48,7 +48,6 @@ function SampleScreen() {
       initPromiseRef.current = initializeDimxSdk({
         // Telemetry to the DimensionX platform is the app's choice; the sample turns it on.
         telemetryEnabled: true,
-        qrCodeEnabled: true,
         sharePhotoEnabled: true,
         shareVideoEnabled: false,
         webVersionUrl: WEB_VERSION_URL,
