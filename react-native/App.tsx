@@ -18,7 +18,6 @@ import { initializeDimxSdk, showARScreen, showWebScreen } from '@dimx/react-nati
 // A public DimensionX experience: the dimension and one of its locations.
 const DEMO_AR_URL = 'https://go.dimx.world/?dim=3358080808&loc=2134961551&live=1&place=1';
 const DEMO_WEB_URL = 'https://go.dimx.world/?dim=3358080808';
-const WEB_VERSION_URL = 'https://app.dimx.world/version';
 const DEFAULT_APP_URL = 'https://go.dimx.world';
 // docs:end
 
@@ -50,7 +49,6 @@ function SampleScreen() {
         telemetryEnabled: true,
         sharePhotoEnabled: true,
         shareVideoEnabled: false,
-        webVersionUrl: WEB_VERSION_URL,
         defaultAppUrl: DEFAULT_APP_URL,
         appScreenActivity: 'world.dimx.sampleapp.rn.MainActivity',
       })

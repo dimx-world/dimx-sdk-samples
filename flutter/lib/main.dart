@@ -39,7 +39,6 @@ class _SampleAppState extends State<SampleApp> {
       'telemetryEnabled': true,
       'sharePhotoEnabled': true,
       'shareVideoEnabled': false,
-      'webVersionUrl': 'https://app.dimx.world/version',
       'defaultAppUrl': 'https://go.dimx.world',
       'appScreenActivity': 'world.dimx.sampleapp.flutter.MainActivity',
     }).catchError((Object error) {

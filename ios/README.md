@@ -27,8 +27,8 @@ xcodebuild -project SampleApp.xcodeproj -scheme SampleApp -sdk iphoneos \
 - The project depends on the `DimxCore` product of the `dimx-ios-sdk` package
   (`project.pbxproj`, `XCRemoteSwiftPackageReference`, `exactVersion`).
 - `SceneDelegate.swift` initialises the SDK once the window exists:
-  `AppConfig`, `addWebVersion`, `setShowAppScreenAction` (how the SDK hands the
-  screen back to the app), then `Context.initialize(window, appConfig)`.
+  `AppConfig`, `setShowAppScreenAction` (how the SDK hands the screen back to
+  the app), then `Context.initialize(window, appConfig)`.
 - `ViewController.swift` opens the screens with
   `Context.inst().showARScreen(url, "", "", onDenied:)` and `showWebScreen(url)`;
   the SDK asks for the permissions itself when the AR screen opens, and
