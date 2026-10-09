@@ -35,5 +35,20 @@
 <string>Save and share photos and videos taken in the AR experience</string>
 <key>NSPhotoLibraryAddUsageDescription</key>
 <string>Save and share photos and videos taken in the AR experience</string>
+<!-- App-Bound Domains: lets the SDK's web screen keep a copy of the DimensionX page
+     and open it with no network (service workers in the web view). Optional, but with
+     the key present every web view of the app is held to its rules - see the SDK's README. -->
+<key>WKAppBoundDomains</key>
+<array>
+	<string>dimx.world</string>
+	<string>dimx-world.firebaseapp.com</string>
+	<string>dimx-world.web.app</string>
+	<string>microsoftonline.com</string>
+	<string>live.com</string>
+	<string>microsoft.com</string>
+	<string>google.com</string>
+	<string>apple.com</string>
+	<string>youtube.com</string>
+</array>
 </dict>
 </plist>
