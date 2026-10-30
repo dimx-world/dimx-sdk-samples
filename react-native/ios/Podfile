@@ -6,10 +6,9 @@ require Pod::Executable.execute_command('node', ['-p',
   )', __dir__]).strip
 
 # react-native-sdk consumes the Dimx iOS SDK as a Swift package (see
-# spm_dependency in its podspec). React Native merges SPM static libraries into
-# the consuming pod's archive, so with statically linked pods ARCore's products
-# land in libreact-native-sdk.a several times over and the link fails on
-# duplicate symbols. Dynamic frameworks are required, not merely preferred.
+# spm_dependency in its podspec), and React Native merges SPM static libraries
+# into the consuming pod's archive. The sample links its pods as dynamic
+# frameworks, the linkage it was validated with.
 ENV['USE_FRAMEWORKS'] ||= 'dynamic'
 
 # The Dimx iOS SDK is iOS 16.4 and up.

@@ -36,9 +36,6 @@ xcodebuild -project SampleApp.xcodeproj -scheme SampleApp -sdk iphoneos \
 - `Info.plist` carries the camera, location, photo library and Bluetooth usage
   descriptions the SDK's APIs make App Store Connect demand: a binary linking
   the SDK without one is refused at upload (ITMS-90683).
-- The target links with `-ObjC` (Other Linker Flags). ARCore, inside the SDK,
-  ships as static libraries whose Objective-C categories the linker drops
-  otherwise, and the app then dies at launch with an unrecognized selector.
 
 The version this sample is pinned to is the SDK release it was validated
 against; the Release Center moves it with every SDK release.

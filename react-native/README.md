@@ -43,8 +43,8 @@ npm run ios
 ```
 
 `pod install` must report `[SPM] Adding SPM dependency on product ["DimxCore"]`:
-the bridge's podspec pulls the DimensionX iOS SDK in as a Swift package. ARCore
-needs a real device on both platforms.
+the bridge's podspec pulls the DimensionX iOS SDK in as a Swift package. The
+sample needs a real device on both platforms: ARCore on Android, ARKit on iOS.
 
 ## What the sample shows
 
